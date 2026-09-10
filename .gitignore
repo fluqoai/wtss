@@ -11,6 +11,9 @@ dist-ssr
 # Local artifacts (not part of the deployed app)
 _reference_hh.html
 build.log
+verify.mjs
+Userskhayrat.git-credentials-safecredentials
+supabase/.temp/
 
 # Editor
 .vscode

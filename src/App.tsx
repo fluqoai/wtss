@@ -5,10 +5,9 @@ import { analyzeMessages, saveBids } from './lib/analyze'
 import * as XLSX from 'xlsx'
 
 const MODELS: { value: string; label: string }[] = [
-  { value: 'meta-llama/llama-3.1-8b-instruct:free', label: 'مجاني — Llama 3.1 8B (للتجربة)' },
-  { value: 'google/gemma-2-9b-it:free', label: 'مجاني — Gemma 2 9B (للتجربة)' },
-  { value: 'anthropic/claude-3.5-haiku', label: 'Claude 3.5 Haiku (سريع ودقيق)' },
-  { value: 'anthropic/claude-3.5-sonnet', label: 'Claude 3.5 Sonnet (الأدق)' },
+  { value: 'nex-agi/nex-n2.5-mini:free', label: 'مجاني — Nex N2.5 Mini (سريع)' },
+  { value: 'liquid/lfm-2.5-2.6b:free', label: 'مجاني — Liquid LFM 2.5 (متوازن)' },
+  { value: 'nvidia/nemotron-3.5-lightning:free', label: 'مجاني — NVIDIA Nemotron 3.5' },
   { value: 'custom', label: 'موديل آخر (أدخله يدوياً)' },
 ]
 
