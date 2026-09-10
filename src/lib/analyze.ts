@@ -68,7 +68,7 @@ export async function analyzeMessages(
 
 /**
  * Persist a batch of new results into the `bids` table.
- * RLS ensures only the authenticated user can write.
+ * RLS requires user_id = auth.uid() AND user_id NOT NULL.
  */
 export async function saveBids(
   rows: AnalyzeResult[],
@@ -82,7 +82,14 @@ export async function saveBids(
     return Number.isFinite(n) ? n : null
   }
 
+  // RLS policy bids_insert_own requires user_id = auth.uid()
+  const { data: userData, error: userErr } = await supabase.auth.getUser()
+  if (userErr || !userData.user) {
+    throw new Error('انتهت الجلسة — سجّل دخول مرة ثانية')
+  }
+
   const payload = rows.map((r) => ({
+    user_id: userData.user.id,
     auction: r.auction,
     winner: r.winner,
     amount: r.amount,

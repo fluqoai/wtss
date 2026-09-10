@@ -43,6 +43,24 @@ export default function App() {
     return () => sub.subscription.unsubscribe()
   }, [])
 
+  // Realtime: re-fetch when bids are inserted/updated/deleted (e.g. via Telegram bot)
+  useEffect(() => {
+    if (!session) return
+    const channel = supabase
+      .channel('bids-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'bids' },
+        () => {
+          loadBids()
+        }
+      )
+      .subscribe()
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [session])
+
   async function loadBids() {
     const { data, error } = await supabase
       .from('bids')
