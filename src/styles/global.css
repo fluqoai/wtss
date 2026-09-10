@@ -1,0 +1,198 @@
+:root{
+  --paper:#F7F3EA;
+  --ink:#1F3A34;
+  --ink-soft:#4A6259;
+  --line:#D9CFB8;
+  --gold:#B8863A;
+  --gold-deep:#8F651F;
+  --red:#8C3A2B;
+  --card:#FFFDF8;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Cairo',sans-serif;
+  padding:28px 16px 60px;
+  line-height:1.6;
+}
+.wrap{max-width:640px;margin:0 auto;}
+header{margin-bottom:24px;}
+.eyebrow-row{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:6px;
+}
+.num{
+  font-weight:800;
+  font-size:15px;
+  color:var(--gold-deep);
+  border:1.5px solid var(--gold-deep);
+  border-radius:50%;
+  width:26px;height:26px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+h1{
+  font-size:26px;
+  font-weight:800;
+  margin:0;
+  letter-spacing:0.2px;
+}
+.sub{
+  color:var(--ink-soft);
+  font-size:14.5px;
+  margin:6px 0 0 36px;
+}
+section{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:18px 18px 20px;
+  margin-bottom:16px;
+}
+section h2{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:16px;
+  font-weight:700;
+  margin:0 0 14px;
+}
+label{
+  display:block;
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--ink-soft);
+  margin:0 0 6px;
+}
+input[type="password"], input[type="text"], input[type="email"], select, textarea{
+  width:100%;
+  padding:11px 12px;
+  border:1.5px solid var(--line);
+  border-radius:7px;
+  font-family:'Cairo',sans-serif;
+  font-size:14.5px;
+  background:#fff;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+input:focus, select:focus, textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+}
+textarea{min-height:130px;resize:vertical;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+.row > div{flex:1;min-width:150px;}
+.hint{font-size:12.5px;color:var(--ink-soft);margin-top:-8px;margin-bottom:14px;}
+button{
+  font-family:'Cairo',sans-serif;
+  font-weight:700;
+  font-size:14.5px;
+  border:none;
+  border-radius:7px;
+  padding:12px 18px;
+  cursor:pointer;
+  transition:transform 0.08s ease;
+}
+button:active{transform:scale(0.98);}
+.btn-primary{
+  background:var(--ink);
+  color:var(--paper);
+  width:100%;
+}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-gold{
+  background:var(--gold);
+  color:#fff;
+}
+.btn-outline{
+  background:transparent;
+  border:1.5px solid var(--line);
+  color:var(--ink-soft);
+}
+.btn-link{
+  background:none;
+  border:none;
+  color:var(--gold-deep);
+  font-size:13px;
+  cursor:pointer;
+  padding:0;
+  text-decoration:underline;
+}
+.status{
+  font-size:13.5px;
+  margin-top:10px;
+  color:var(--ink-soft);
+  min-height:18px;
+}
+.status.error{color:var(--red);}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+th{
+  text-align:right;
+  font-weight:700;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  border-bottom:1.5px solid var(--line);
+  padding:8px 6px;
+}
+td{
+  padding:10px 6px;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+td.rownum{
+  color:var(--gold-deep);
+  font-weight:700;
+  width:26px;
+}
+td.amount{
+  font-weight:700;
+  white-space:nowrap;
+}
+.empty{
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:14px;
+  padding:20px 0;
+}
+.table-actions{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+}
+.table-actions button{flex:1;}
+.del{
+  background:none;
+  border:none;
+  color:var(--ink-soft);
+  cursor:pointer;
+  font-size:16px;
+  padding:0 4px;
+}
+
+/* Auth box */
+.auth-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:24px 18px;
+  max-width:380px;
+  margin:80px auto 0;
+  text-align:center;
+}
+.auth-box h2{margin:0 0 6px;font-size:18px;}
+.auth-box p{color:var(--ink-soft);font-size:13.5px;margin:0 0 16px;}
+.user-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:8px;padding:8px 14px;margin-bottom:16px;
+  font-size:13px;color:var(--ink-soft);
+}
+.user-bar b{color:var(--ink);}
