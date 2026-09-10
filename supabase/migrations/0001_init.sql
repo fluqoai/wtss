@@ -12,11 +12,11 @@ create table if not exists public.bids (
   user_id uuid not null references auth.users(id) on delete cascade,
   auction text not null,
   winner text not null,
-  amount text not null,                  -- "200 ريال" كما يرجعه الموديل
-  amount_value numeric(12,2),            -- الرقم فقط (nullable)
+  amount text not null,                                    -- "200 ريال" كما يرجعه الموديل
+  amount_value numeric(12,2),                              -- الرقم فقط (nullable)
   currency text not null default 'SAR',
-  model text,                            -- الموديل المستخدم
-  source_text text,                      -- النص الأصلي (للتتبّع، max 4000 char)
+  model text,                                              -- الموديل المستخدم
+  source_text text,                                        -- النص الأصلي (للتتبّع)
   created_at timestamptz not null default now()
 );
 
@@ -24,16 +24,17 @@ create index if not exists bids_user_id_idx on public.bids(user_id);
 create index if not exists bids_created_at_idx on public.bids(created_at desc);
 
 -- ============================================================
--- RLS: المستخدم المسجّل فقط (ecosofasa@gmail.com ضمنياً عبر auth.uid())
+-- RLS: المستخدم المسجّل فقط
 -- ============================================================
 alter table public.bids enable row level security;
 
-drop policy if exists "bids_select_own" on public.bids;
+drop policy if exists "bids_select_own_or_anon" on public.bids;
+drop policy if exists "bids_insert_anyone" on public.bids;
 drop policy if exists "bids_insert_own" on public.bids;
-drop policy if exists "bids_update_own" on public.bids;
-drop policy if exists "bids_delete_own" on public.bids;
+drop policy if exists "bids_update_owner" on public.bids;
+drop policy if exists "bids_delete_owner" on public.bids;
 
--- قراءة: سجلات المستخدم الحالي فقط
+-- قراءة: سجلات المستخدم فقط (لا anonymous)
 create policy "bids_select_own"
   on public.bids
   for select
@@ -58,7 +59,7 @@ create policy "bids_delete_own"
   using (user_id = auth.uid());
 
 -- ============================================================
--- (اختياري) سجل استخدامات AI — للتتبع لاحقاً
+-- (اختياري) سجل استخدامات AI
 -- ============================================================
 create table if not exists public.ai_usage (
   id uuid primary key default gen_random_uuid(),
@@ -75,7 +76,8 @@ create index if not exists ai_usage_created_at_idx on public.ai_usage(created_at
 
 alter table public.ai_usage enable row level security;
 
-drop policy if exists "ai_usage_select_own" on public.ai_usage;
+drop policy if exists "ai_usage_select_owner" on public.ai_usage;
+drop policy if exists "ai_usage_insert_anyone" on public.ai_usage;
 drop policy if exists "ai_usage_insert_own" on public.ai_usage;
 
 create policy "ai_usage_select_own"
